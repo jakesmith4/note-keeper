@@ -120,13 +120,22 @@ function Note({
   onCurrentNote,
 }) {
   const [settingsOpen, setSettingsOpen] = useState(true);
+  const [noteBcg, setNoteBcg] = useState('#fff');
 
   function openCloseSettings() {
     setSettingsOpen(settings => !settings);
   }
 
+  function changeNoteBcg(color) {
+    setNoteBcg(color);
+  }
+
   return (
-    <div className="note" onClick={() => onCurrentNote(note)}>
+    <article
+      className="note"
+      style={{ background: noteBcg }}
+      onClick={() => onCurrentNote(note)}
+    >
       {settingsOpen && (
         <>
           <div className="note-heading-wrapper">
@@ -134,6 +143,7 @@ function Note({
               className="note-heading-input"
               type="text"
               value={note.heading}
+              style={{ background: noteBcg }}
               onChange={e => onUpdateNoteHeading(note.id, e.target.value)}
             />
             <button className="note-settings-btn" onClick={openCloseSettings}>
@@ -145,6 +155,7 @@ function Note({
               className="note-text-textarea"
               type="text"
               value={note.text}
+              style={{ background: noteBcg }}
               onChange={e => onUpdateNoteText(note.id, e.target.value)}
             />
           </div>
@@ -152,19 +163,38 @@ function Note({
       )}
 
       {!settingsOpen && (
-        <div className="note-settings-container">
-          <button
-            className="note-delete-btn"
-            onClick={() => onDeleteNote(note.id)}
-          >
-            <i className="fa-solid fa-trash"></i>
-          </button>
-          <button className="note-close-btn" onClick={openCloseSettings}>
-            <i className="fa-solid fa-xmark"></i>
-          </button>
+        <div className="note-back-container">
+          <div className="note-back-color-container">
+            <div
+              className="note-back-circle note-green"
+              onClick={() => changeNoteBcg('green')}
+            ></div>
+            <div
+              className="note-back-circle note-blue"
+              onClick={() => changeNoteBcg('blue')}
+            ></div>
+            <div
+              className="note-back-circle note-white"
+              onClick={() => changeNoteBcg('#fff')}
+            ></div>
+          </div>
+          <div className="note-back-btns-container">
+            <button
+              className="note-delete-btn note-back-btn"
+              onClick={() => onDeleteNote(note.id)}
+            >
+              <i className="fa-solid fa-trash"></i>
+            </button>
+            <button
+              className="note-close-btn note-back-btn"
+              onClick={openCloseSettings}
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+          </div>
         </div>
       )}
-    </div>
+    </article>
   );
 }
 
