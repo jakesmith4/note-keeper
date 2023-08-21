@@ -96,6 +96,8 @@ function NotesContainer({
   onDeleteNote,
   onCurrentNote,
 }) {
+  const [curOpen, setCurOpen] = useState(null);
+
   return (
     <div className="notes-container section-center ">
       {allNotes.map(note => (
@@ -105,6 +107,8 @@ function NotesContainer({
           onUpdateNoteText={onUpdateNoteText}
           onUpdateNoteHeading={onUpdateNoteHeading}
           onDeleteNote={onDeleteNote}
+          curOpen={curOpen}
+          onOpen={setCurOpen}
           key={note.id}
         />
       ))}
@@ -117,13 +121,20 @@ function Note({
   onUpdateNoteText,
   onUpdateNoteHeading,
   onDeleteNote,
+  curOpen,
+  onOpen,
   onCurrentNote,
 }) {
-  const [settingsOpen, setSettingsOpen] = useState(true);
+  const isOpen = note.id === curOpen;
+
   const [noteBcg, setNoteBcg] = useState('#fff');
 
-  function openCloseSettings() {
-    setSettingsOpen(settings => !settings);
+  function closeSettings() {
+    onOpen(null);
+  }
+
+  function handleToggle(id) {
+    onOpen(id);
   }
 
   function changeNoteBcg(color) {
@@ -136,7 +147,7 @@ function Note({
       style={{ background: noteBcg }}
       onClick={() => onCurrentNote(note)}
     >
-      {settingsOpen && (
+      {!isOpen && (
         <>
           <div className="note-heading-wrapper">
             <input
@@ -146,7 +157,10 @@ function Note({
               style={{ background: noteBcg }}
               onChange={e => onUpdateNoteHeading(note.id, e.target.value)}
             />
-            <button className="note-settings-btn" onClick={openCloseSettings}>
+            <button
+              className="note-settings-btn"
+              onClick={() => handleToggle(note.id)}
+            >
               <i className="fa-solid fa-ellipsis-vertical"></i>
             </button>
           </div>
@@ -162,7 +176,7 @@ function Note({
         </>
       )}
 
-      {!settingsOpen && (
+      {isOpen && (
         <div className="note-back-container">
           <div className="note-back-color-container">
             <div
@@ -187,7 +201,7 @@ function Note({
             </button>
             <button
               className="note-close-btn note-back-btn"
-              onClick={openCloseSettings}
+              onClick={closeSettings}
             >
               <i className="fa-solid fa-xmark"></i>
             </button>
