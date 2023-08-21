@@ -42,7 +42,12 @@ export default function App() {
   }
 
   function handleDeleteNote(id) {
-    setAllNotes(allNotes => allNotes.filter(note => note.id !== id));
+    const confirmed = window.confirm(
+      `Are you sure you want to delete this note?`
+    );
+    if (confirmed) {
+      setAllNotes(allNotes => allNotes.filter(note => note.id !== id));
+    }
   }
 
   function handleCurrentNote(note) {
@@ -57,6 +62,7 @@ export default function App() {
         onCurrentNote={handleCurrentNote}
         onUpdateNoteText={handleUpdateNoteText}
         onUpdateNoteHeading={handleUpdateNoteHeading}
+        onDeleteNote={handleDeleteNote}
       />
       <AddNoteBtn onToggleModal={handleToggleModal} />
       {openModal && (
@@ -87,6 +93,7 @@ function NotesContainer({
   allNotes,
   onUpdateNoteText,
   onUpdateNoteHeading,
+  onDeleteNote,
   onCurrentNote,
 }) {
   return (
@@ -97,6 +104,7 @@ function NotesContainer({
           onCurrentNote={onCurrentNote}
           onUpdateNoteText={onUpdateNoteText}
           onUpdateNoteHeading={onUpdateNoteHeading}
+          onDeleteNote={onDeleteNote}
           key={note.id}
         />
       ))}
@@ -104,7 +112,13 @@ function NotesContainer({
   );
 }
 
-function Note({ note, onUpdateNoteText, onUpdateNoteHeading, onCurrentNote }) {
+function Note({
+  note,
+  onUpdateNoteText,
+  onUpdateNoteHeading,
+  onDeleteNote,
+  onCurrentNote,
+}) {
   const [settingsOpen, setSettingsOpen] = useState(true);
 
   function openCloseSettings() {
@@ -139,7 +153,10 @@ function Note({ note, onUpdateNoteText, onUpdateNoteHeading, onCurrentNote }) {
 
       {!settingsOpen && (
         <div className="note-settings-container">
-          <button className="note-delete-btn">
+          <button
+            className="note-delete-btn"
+            onClick={() => onDeleteNote(note.id)}
+          >
             <i className="fa-solid fa-trash"></i>
           </button>
           <button className="note-close-btn" onClick={openCloseSettings}>
