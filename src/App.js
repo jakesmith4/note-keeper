@@ -17,8 +17,6 @@ export default function App() {
   const [allNotes, setAllNotes] = useState(initalNotes);
   const [openModal, setopenModal] = useState(false);
 
-  const [currentNote, setCurrentNote] = useState(null);
-
   function handleUpdateNoteHeading(id, value) {
     setAllNotes(allNotes =>
       allNotes.map(note =>
@@ -50,16 +48,11 @@ export default function App() {
     }
   }
 
-  function handleCurrentNote(note) {
-    setCurrentNote(note);
-  }
-
   return (
     <div className="app">
       <SearchBar />
       <NotesContainer
         allNotes={allNotes}
-        onCurrentNote={handleCurrentNote}
         onUpdateNoteText={handleUpdateNoteText}
         onUpdateNoteHeading={handleUpdateNoteHeading}
         onDeleteNote={handleDeleteNote}
@@ -94,7 +87,6 @@ function NotesContainer({
   onUpdateNoteText,
   onUpdateNoteHeading,
   onDeleteNote,
-  onCurrentNote,
 }) {
   const [curOpen, setCurOpen] = useState(null);
 
@@ -103,7 +95,6 @@ function NotesContainer({
       {allNotes.map(note => (
         <Note
           note={note}
-          onCurrentNote={onCurrentNote}
           onUpdateNoteText={onUpdateNoteText}
           onUpdateNoteHeading={onUpdateNoteHeading}
           onDeleteNote={onDeleteNote}
@@ -123,7 +114,6 @@ function Note({
   onDeleteNote,
   curOpen,
   onOpen,
-  onCurrentNote,
 }) {
   const isOpen = note.id === curOpen;
 
@@ -142,11 +132,7 @@ function Note({
   }
 
   return (
-    <article
-      className="note"
-      style={{ background: noteBcg }}
-      onClick={() => onCurrentNote(note)}
-    >
+    <article className="note" style={{ background: noteBcg }}>
       {!isOpen && (
         <>
           <div className="note-heading-wrapper">
