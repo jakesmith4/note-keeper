@@ -41,6 +41,10 @@ export default function App() {
     setAllNotes(allNotes => [...allNotes, note]);
   }
 
+  function handleDeleteNote(id) {
+    setAllNotes(allNotes => allNotes.filter(note => note.id !== id));
+  }
+
   function handleCurrentNote(note) {
     setCurrentNote(note);
   }
@@ -101,25 +105,48 @@ function NotesContainer({
 }
 
 function Note({ note, onUpdateNoteText, onUpdateNoteHeading, onCurrentNote }) {
+  const [settingsOpen, setSettingsOpen] = useState(true);
+
+  function openCloseSettings() {
+    setSettingsOpen(settings => !settings);
+  }
+
   return (
     <div className="note" onClick={() => onCurrentNote(note)}>
-      <div className="note-heading-wrapper">
-        <input
-          className="note-heading-input"
-          type="text"
-          value={note.heading}
-          onChange={e => onUpdateNoteHeading(note.id, e.target.value)}
-        />
-        <button className="note-settings-btn">
-          <i className="fa-solid fa-ellipsis-vertical note-settings"></i>
-        </button>
-      </div>
-      <textarea
-        className="note-text-textarea"
-        type="text"
-        value={note.text}
-        onChange={e => onUpdateNoteText(note.id, e.target.value)}
-      />
+      {settingsOpen && (
+        <>
+          <div className="note-heading-wrapper">
+            <input
+              className="note-heading-input"
+              type="text"
+              value={note.heading}
+              onChange={e => onUpdateNoteHeading(note.id, e.target.value)}
+            />
+            <button className="note-settings-btn" onClick={openCloseSettings}>
+              <i className="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+          </div>
+          <div className="note-text-wrapper">
+            <textarea
+              className="note-text-textarea"
+              type="text"
+              value={note.text}
+              onChange={e => onUpdateNoteText(note.id, e.target.value)}
+            />
+          </div>
+        </>
+      )}
+
+      {!settingsOpen && (
+        <div className="note-settings-container">
+          <button className="note-delete-btn">
+            <i className="fa-solid fa-trash"></i>
+          </button>
+          <button className="note-close-btn" onClick={openCloseSettings}>
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
