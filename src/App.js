@@ -56,6 +56,10 @@ export default function App() {
     );
     if (confirmed) {
       setAllNotes(allNotes => allNotes.filter(note => note.id !== id));
+
+      setfilteredNotes(allFilteredNotes =>
+        allFilteredNotes.filter(note => note.id !== id)
+      );
     }
   }
 
@@ -140,7 +144,15 @@ function NotesContainer({
         ))}
 
       {searchInput && filteredNotes.length <= 0 && (
-        <div className="no-results-message"></div>
+        <div className="no-results-message">
+          <h3>
+            no results matched your search for{' '}
+            <span className="no-results-input-text"> '{searchInput}'</span>
+          </h3>
+          <p className="no-results-note">
+            please clear the search field to see all notes
+          </p>
+        </div>
       )}
     </div>
   );

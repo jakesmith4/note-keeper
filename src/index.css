@@ -578,8 +578,18 @@ Modal
   cursor: pointer;
 }
 
-.no-results-message {
-  width: 10rem;
-  height: 10rem;
-  background: red;
+/* 
+==========
+No Results
+==========
+*/
+.no-results-input-text {
+  font-family: var(--bodyFont);
+  color: red;
+  font-weight: bold;
+}
+
+.no-results-note {
+  color: red;
+  text-transform: capitalize;
 }
