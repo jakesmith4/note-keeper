@@ -139,7 +139,7 @@ function NotesContainer({
           />
         ))}
 
-      {searchInput.length > 0 && filteredNotes.length <= 0 && (
+      {searchInput && filteredNotes.length <= 0 && (
         <div className="no-results-message"></div>
       )}
     </div>
