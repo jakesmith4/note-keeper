@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+import notepadImg from './notepad-bcg.jpg';
+import cookingImg from './cooking-bcg.jpg';
+
 const initalNotes = [
   {
     heading: 'Grocery List',
@@ -172,34 +175,55 @@ function Note({
   const isOpen = note.id === curOpen;
 
   const [noteBcg, setNoteBcg] = useState('#fff');
+  const [toggleNoteBtns, setToggleNoteBtns] = useState(false);
+  const [toggleNoteBcg, setToggleNoteBcg] = useState(false);
 
-  function closeSettings() {
+  function handleToggleNoteBtns() {
+    setToggleNoteBtns(noteBcg => !noteBcg);
+  }
+
+  function handleCloseSettings() {
     onOpen(null);
   }
 
-  function handleToggle(id) {
+  function handleFlipNote(id) {
     onOpen(id);
   }
 
   function changeNoteBcg(color) {
     setNoteBcg(color);
+    setToggleNoteBcg(false);
+  }
+
+  function changeNoteImg(url) {
+    setNoteBcg(url);
+    setToggleNoteBcg(true);
   }
 
   return (
-    <article className="note" style={{ background: noteBcg }}>
+    <article
+      className={isOpen && toggleNoteBcg ? 'note note-img' : 'note'}
+      style={
+        toggleNoteBcg
+          ? { background: `url(${noteBcg})` }
+          : { background: noteBcg }
+      }
+    >
       {!isOpen && (
         <>
           <div className="note-heading-wrapper">
             <input
               className="note-heading-input"
+              style={
+                noteBcg === '#fff' ? { color: 'black' } : { color: '#fff' }
+              }
               type="text"
               value={note.heading}
-              style={{ background: noteBcg }}
               onChange={e => onUpdateNoteHeading(note.id, e.target.value)}
             />
             <button
               className="note-settings-btn"
-              onClick={() => handleToggle(note.id)}
+              onClick={() => handleFlipNote(note.id)}
             >
               <i className="fa-solid fa-ellipsis-vertical"></i>
             </button>
@@ -207,9 +231,11 @@ function Note({
           <div className="note-text-wrapper">
             <textarea
               className="note-text-textarea"
+              style={
+                noteBcg === '#fff' ? { color: 'black' } : { color: '#fff' }
+              }
               type="text"
               value={note.text}
-              style={{ background: noteBcg }}
               onChange={e => onUpdateNoteText(note.id, e.target.value)}
             />
           </div>
@@ -218,36 +244,55 @@ function Note({
 
       {isOpen && (
         <div className="note-back-container">
-          <div className="note-back-color-container">
-            <div
-              className="note-back-circle note-coral"
-              onClick={() => changeNoteBcg('#77172e')}
-            ></div>
-            <div
-              className="note-back-circle note-sand"
-              onClick={() => changeNoteBcg('#7c4a03')}
-            ></div>
-            <div
-              className="note-back-circle note-sage"
-              onClick={() => changeNoteBcg('#0c625d')}
-            ></div>
-            <div
-              className="note-back-circle note-storm"
-              onClick={() => changeNoteBcg('#284255')}
-            ></div>
-            <div
-              className="note-back-circle note-dusk"
-              onClick={() => changeNoteBcg('#472e5b')}
-            ></div>
-            <div
-              className="note-back-circle note-blossom"
-              onClick={() => changeNoteBcg('#6c394f')}
-            ></div>
-            <div
-              className="note-back-circle note-white"
-              onClick={() => changeNoteBcg('#fff')}
-            ></div>
-          </div>
+          {toggleNoteBtns ? (
+            <div className="note-back-circle-container">
+              <div
+                className="note-back-circle note-coral"
+                onClick={() => changeNoteBcg('#77172e')}
+              ></div>
+              <div
+                className="note-back-circle note-sand"
+                onClick={() => changeNoteBcg('#7c4a03')}
+              ></div>
+              <div
+                className="note-back-circle note-sage"
+                onClick={() => changeNoteBcg('#0c625d')}
+              ></div>
+              <div
+                className="note-back-circle note-storm"
+                onClick={() => changeNoteBcg('#284255')}
+              ></div>
+              <div
+                className="note-back-circle note-dusk"
+                onClick={() => changeNoteBcg('#472e5b')}
+              ></div>
+              <div
+                className="note-back-circle note-blossom"
+                onClick={() => changeNoteBcg('#6c394f')}
+              ></div>
+              <div
+                className="note-back-circle note-white"
+                onClick={() => changeNoteBcg('#fff')}
+              ></div>
+            </div>
+          ) : (
+            <div>
+              <div className="note-back-circle-container">
+                <img
+                  src={notepadImg}
+                  alt="Notepad"
+                  className="note-back-img"
+                  onClick={() => changeNoteImg(notepadImg)}
+                />
+                <img
+                  src={cookingImg}
+                  alt="Notepad"
+                  className="note-back-img"
+                  onClick={() => changeNoteImg(cookingImg)}
+                />
+              </div>
+            </div>
+          )}
           <div className="note-back-btns-container">
             <button
               className="note-delete-btn note-back-btn"
@@ -256,8 +301,14 @@ function Note({
               <i className="fa-solid fa-trash"></i>
             </button>
             <button
+              className="note-img-btn note-back-btn"
+              onClick={handleToggleNoteBtns}
+            >
+              <i className="fa-regular fa-image"></i>
+            </button>
+            <button
               className="note-close-btn note-back-btn"
-              onClick={closeSettings}
+              onClick={handleCloseSettings}
             >
               <i className="fa-solid fa-xmark"></i>
             </button>
