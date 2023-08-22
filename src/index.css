@@ -344,10 +344,11 @@ SEARCHBAR
   flex: 1 1 100%;
 }
 
-.searchbar-btn {
+.searchbar-icon {
   background: transparent;
   border: transparent;
   color: var(--white);
+  cursor: pointer;
 }
 
 .searchbar-btn:hover {

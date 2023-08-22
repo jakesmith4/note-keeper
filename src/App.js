@@ -24,7 +24,9 @@ export default function App() {
     setSearchInput(value);
 
     setfilteredNotes(
-      allNotes.filter(note => note.heading.toLowerCase().includes(value))
+      allNotes.filter(note =>
+        note.heading.toLowerCase().includes(value.toLowerCase())
+      )
     );
   }
 
@@ -88,18 +90,19 @@ export default function App() {
 function SearchBar({ searchInput, onFilterSearchResults }) {
   return (
     <div className="searchbar">
-      <form className="section-center searchbar-center">
+      <div className="section-center searchbar-center">
         <input
           type="text"
           placeholder="Search Notes"
           className="searchbar-input"
+          id="search-notes"
           value={searchInput}
           onChange={e => onFilterSearchResults(e.target.value)}
         />
-        <button className="searchbar-btn">
+        <label htmlFor="search-notes" className="searchbar-icon">
           <i className="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </form>
+        </label>
+      </div>
     </div>
   );
 }
