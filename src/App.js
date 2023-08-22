@@ -166,12 +166,28 @@ function Note({
         <div className="note-back-container">
           <div className="note-back-color-container">
             <div
-              className="note-back-circle note-green"
-              onClick={() => changeNoteBcg('green')}
+              className="note-back-circle note-coral"
+              onClick={() => changeNoteBcg('#77172e')}
             ></div>
             <div
-              className="note-back-circle note-blue"
-              onClick={() => changeNoteBcg('blue')}
+              className="note-back-circle note-sand"
+              onClick={() => changeNoteBcg('#7c4a03')}
+            ></div>
+            <div
+              className="note-back-circle note-sage"
+              onClick={() => changeNoteBcg('#0c625d')}
+            ></div>
+            <div
+              className="note-back-circle note-storm"
+              onClick={() => changeNoteBcg('#284255')}
+            ></div>
+            <div
+              className="note-back-circle note-dusk"
+              onClick={() => changeNoteBcg('#472e5b')}
+            ></div>
+            <div
+              className="note-back-circle note-blossom"
+              onClick={() => changeNoteBcg('#6c394f')}
             ></div>
             <div
               className="note-back-circle note-white"

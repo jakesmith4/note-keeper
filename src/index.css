@@ -369,7 +369,7 @@ Notes
   padding: 0.7rem;
   margin-bottom: 1rem;
   min-height: 117px;
-  min-width: 437px;
+  /* min-width: 437px; */
 }
 
 .note-heading-wrapper {
@@ -382,6 +382,7 @@ Notes
   font-family: var(--headingFont);
   border: none;
   font-size: 1.953rem;
+  width: 100%;
   text-transform: capitalize;
 }
 
@@ -453,12 +454,28 @@ Notes
   cursor: pointer;
 }
 
-.note-green {
-  background: green;
+.note-coral {
+  background: #77172e;
 }
 
-.note-blue {
-  background: blue;
+.note-sand {
+  background: #7c4a03;
+}
+
+.note-sage {
+  background: #0c625d;
+}
+
+.note-storm {
+  background: #284255;
+}
+
+.note-dusk {
+  background: #472e5b;
+}
+
+.note-blossom {
+  background: #6c394f;
 }
 
 .note-white {
