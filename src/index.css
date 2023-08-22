@@ -508,7 +508,7 @@ Notes
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 2px solid var(--white);
+  border: 2px solid var(--grey-300);
   cursor: pointer;
   z-index: 1;
 }

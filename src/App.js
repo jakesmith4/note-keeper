@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 import notepadImg from './notepad-bcg.jpg';
+import kitchenImg from './kitchen-bcg.jpg';
+
 import cookingImg from './cooking-bcg.jpg';
 
 const initalNotes = [
@@ -279,15 +281,15 @@ function Note({
             <div>
               <div className="note-back-circle-container">
                 <img
-                  src={notepadImg}
+                  src={kitchenImg}
                   alt="Notepad"
-                  className="note-back-img"
-                  onClick={() => changeNoteImg(notepadImg)}
+                  className="note-back-img img"
+                  onClick={() => changeNoteImg(kitchenImg)}
                 />
                 <img
                   src={cookingImg}
                   alt="Notepad"
-                  className="note-back-img"
+                  className="note-back-img img"
                   onClick={() => changeNoteImg(cookingImg)}
                 />
               </div>
