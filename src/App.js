@@ -16,6 +16,17 @@ const initalNotes = [
 export default function App() {
   const [allNotes, setAllNotes] = useState(initalNotes);
   const [openModal, setopenModal] = useState(false);
+  const [filteredNotes, setfilteredNotes] = useState([]);
+
+  const [searchInput, setSearchInput] = useState('');
+
+  function handleFilterSearchResults(value) {
+    setSearchInput(value);
+
+    setfilteredNotes(
+      allNotes.filter(note => note.heading.toLowerCase().includes(value))
+    );
+  }
 
   function handleUpdateNoteHeading(id, value) {
     setAllNotes(allNotes =>
@@ -50,12 +61,17 @@ export default function App() {
 
   return (
     <div className="app">
-      <SearchBar />
+      <SearchBar
+        searchInput={searchInput}
+        onFilterSearchResults={handleFilterSearchResults}
+      />
       <NotesContainer
         allNotes={allNotes}
         onUpdateNoteText={handleUpdateNoteText}
         onUpdateNoteHeading={handleUpdateNoteHeading}
         onDeleteNote={handleDeleteNote}
+        filteredNotes={filteredNotes}
+        searchInput={searchInput}
       />
       <AddNoteBtn onToggleModal={handleToggleModal} />
       {openModal && (
@@ -65,7 +81,7 @@ export default function App() {
   );
 }
 
-function SearchBar() {
+function SearchBar({ searchInput, onFilterSearchResults }) {
   return (
     <div className="searchbar">
       <form className="section-center searchbar-center">
@@ -73,6 +89,8 @@ function SearchBar() {
           type="text"
           placeholder="Search Notes"
           className="searchbar-input"
+          value={searchInput}
+          onChange={e => onFilterSearchResults(e.target.value)}
         />
         <button className="searchbar-btn">
           <i className="fa-solid fa-magnifying-glass"></i>
@@ -87,22 +105,43 @@ function NotesContainer({
   onUpdateNoteText,
   onUpdateNoteHeading,
   onDeleteNote,
+  filteredNotes,
+  searchInput,
 }) {
   const [curOpen, setCurOpen] = useState(null);
 
   return (
     <div className="notes-container section-center ">
-      {allNotes.map(note => (
-        <Note
-          note={note}
-          onUpdateNoteText={onUpdateNoteText}
-          onUpdateNoteHeading={onUpdateNoteHeading}
-          onDeleteNote={onDeleteNote}
-          curOpen={curOpen}
-          onOpen={setCurOpen}
-          key={note.id}
-        />
-      ))}
+      {!searchInput &&
+        allNotes.map(note => (
+          <Note
+            note={note}
+            onUpdateNoteText={onUpdateNoteText}
+            onUpdateNoteHeading={onUpdateNoteHeading}
+            onDeleteNote={onDeleteNote}
+            curOpen={curOpen}
+            onOpen={setCurOpen}
+            key={note.id}
+          />
+        ))}
+
+      {searchInput &&
+        filteredNotes &&
+        filteredNotes.map(note => (
+          <Note
+            note={note}
+            onUpdateNoteText={onUpdateNoteText}
+            onUpdateNoteHeading={onUpdateNoteHeading}
+            onDeleteNote={onDeleteNote}
+            curOpen={curOpen}
+            onOpen={setCurOpen}
+            key={note.id}
+          />
+        ))}
+
+      {searchInput.length > 0 && filteredNotes.length <= 0 && (
+        <div className="no-results-message"></div>
+      )}
     </div>
   );
 }

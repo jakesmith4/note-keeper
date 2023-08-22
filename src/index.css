@@ -577,3 +577,9 @@ Modal
 .modal-create-btn {
   cursor: pointer;
 }
+
+.no-results-message {
+  width: 10rem;
+  height: 10rem;
+  background: red;
+}
