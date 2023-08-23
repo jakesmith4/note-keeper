@@ -35,8 +35,6 @@ export default function App() {
         note.heading.toLowerCase().includes(value.toLowerCase())
       )
     );
-
-    console.log(filteredNotes);
   }
 
   function handleUpdateNoteHeading(id, value) {
@@ -227,7 +225,6 @@ function Note({
   }
 
   function changeNoteBcg(color, note) {
-    console.log('hello world');
     onUpdateNoteBackground(note.id, color);
     setToggleNoteBcg(false);
   }
@@ -386,7 +383,6 @@ function Modal({ onToggleModal, onAddNote }) {
     };
 
     onToggleModal();
-    console.log(newNote);
     onAddNote(newNote);
   }
 
