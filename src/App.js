@@ -9,13 +9,13 @@ const initalNotes = [
   {
     heading: 'Grocery List',
     text: 'oranges, apples, lunch meat, corn, carrots',
-    background: 'green',
+    background: '#fff',
     id: 335875,
   },
   {
     heading: 'P90X Videos',
     text: 'chest and back, plyometrics, shoulders and arms, legs and back, back and byceps',
-    background: 'blue',
+    background: '#fff',
     id: 449883,
   },
 ];
@@ -229,13 +229,11 @@ function Note({
 
   function changeNoteBcg(color, note) {
     console.log('hello world');
-    setNoteBcg(color);
     onUpdateNoteBackground(note.id, color);
     setToggleNoteBcg(false);
   }
 
   function changeNoteImg(url, note) {
-    setNoteBcg(url);
     onUpdateNoteBackground(note.id, url);
     setToggleNoteBcg(true);
   }
@@ -251,7 +249,9 @@ function Note({
             <input
               className="note-heading-input"
               style={
-                noteBcg === '#fff' ? { color: 'black' } : { color: '#fff' }
+                note.background === '#fff'
+                  ? { color: 'black' }
+                  : { color: '#fff' }
               }
               type="text"
               value={note.heading}
@@ -259,6 +259,11 @@ function Note({
             />
             <button
               className="note-settings-btn"
+              style={
+                note.background === '#fff'
+                  ? { color: 'black' }
+                  : { color: '#fff' }
+              }
               onClick={() => handleFlipNote(note.id)}
             >
               <i className="fa-solid fa-ellipsis-vertical"></i>
@@ -268,7 +273,9 @@ function Note({
             <textarea
               className="note-text-textarea"
               style={
-                noteBcg === '#fff' ? { color: 'black' } : { color: '#fff' }
+                note.background === '#fff'
+                  ? { color: 'black' }
+                  : { color: '#fff' }
               }
               type="text"
               value={note.text}
@@ -375,6 +382,7 @@ function Modal({ onToggleModal, onAddNote }) {
     const newNote = {
       heading,
       text,
+      background: '#fff',
       id: crypto.randomUUID(),
     };
 
