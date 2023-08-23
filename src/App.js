@@ -211,7 +211,6 @@ function Note({
 }) {
   const isOpen = note.id === curOpen;
 
-  const [noteBcg, setNoteBcg] = useState('#fff');
   const [toggleNoteBtns, setToggleNoteBtns] = useState(true);
   const [toggleNoteBcg, setToggleNoteBcg] = useState(false);
 
