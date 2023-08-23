@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import notepadImg from './notepad-bcg.jpg';
 import kitchenImg from './kitchen-bcg.jpg';
 import cookingImg from './cooking-bcg.jpg';
 import musicImg from './music-bcg.jpg';
