@@ -9,11 +9,13 @@ const initalNotes = [
   {
     heading: 'Grocery List',
     text: 'oranges, apples, lunch meat, corn, carrots',
+    background: 'green',
     id: 335875,
   },
   {
     heading: 'P90X Videos',
     text: 'chest and back, plyometrics, shoulders and arms, legs and back, back and byceps',
+    background: 'blue',
     id: 449883,
   },
 ];
@@ -33,6 +35,8 @@ export default function App() {
         note.heading.toLowerCase().includes(value.toLowerCase())
       )
     );
+
+    console.log(filteredNotes);
   }
 
   function handleUpdateNoteHeading(id, value) {
@@ -41,11 +45,37 @@ export default function App() {
         note.id === id ? { ...note, heading: value } : note
       )
     );
+
+    setfilteredNotes(allFilteredNotes =>
+      allFilteredNotes.map(note =>
+        note.id === id ? { ...note, heading: value } : note
+      )
+    );
   }
 
   function handleUpdateNoteText(id, value) {
     setAllNotes(allNotes =>
       allNotes.map(note => (note.id === id ? { ...note, text: value } : note))
+    );
+
+    setfilteredNotes(allFilteredNotes =>
+      allFilteredNotes.map(note =>
+        note.id === id ? { ...note, text: value } : note
+      )
+    );
+  }
+
+  function handleUpdateNoteBackground(id, backgroundValue) {
+    setAllNotes(AllNotes =>
+      AllNotes.map(note =>
+        note.id === id ? { ...note, background: backgroundValue } : note
+      )
+    );
+
+    setfilteredNotes(AllFilteredNotes =>
+      AllFilteredNotes.map(note =>
+        note.id === id ? { ...note, background: backgroundValue } : note
+      )
     );
   }
 
@@ -80,6 +110,7 @@ export default function App() {
         allNotes={allNotes}
         onUpdateNoteText={handleUpdateNoteText}
         onUpdateNoteHeading={handleUpdateNoteHeading}
+        onUpdateNoteBackground={handleUpdateNoteBackground}
         onDeleteNote={handleDeleteNote}
         filteredNotes={filteredNotes}
         searchInput={searchInput}
@@ -116,6 +147,7 @@ function NotesContainer({
   allNotes,
   onUpdateNoteText,
   onUpdateNoteHeading,
+  onUpdateNoteBackground,
   onDeleteNote,
   filteredNotes,
   searchInput,
@@ -130,6 +162,7 @@ function NotesContainer({
             note={note}
             onUpdateNoteText={onUpdateNoteText}
             onUpdateNoteHeading={onUpdateNoteHeading}
+            onUpdateNoteBackground={onUpdateNoteBackground}
             onDeleteNote={onDeleteNote}
             curOpen={curOpen}
             onOpen={setCurOpen}
@@ -144,6 +177,7 @@ function NotesContainer({
             note={note}
             onUpdateNoteText={onUpdateNoteText}
             onUpdateNoteHeading={onUpdateNoteHeading}
+            onUpdateNoteBackground={onUpdateNoteBackground}
             onDeleteNote={onDeleteNote}
             curOpen={curOpen}
             onOpen={setCurOpen}
@@ -170,6 +204,7 @@ function Note({
   note,
   onUpdateNoteText,
   onUpdateNoteHeading,
+  onUpdateNoteBackground,
   onDeleteNote,
   curOpen,
   onOpen,
@@ -192,24 +227,23 @@ function Note({
     onOpen(id);
   }
 
-  function changeNoteBcg(color) {
+  function changeNoteBcg(color, note) {
+    console.log('hello world');
     setNoteBcg(color);
+    onUpdateNoteBackground(note.id, color);
     setToggleNoteBcg(false);
   }
 
-  function changeNoteImg(url) {
+  function changeNoteImg(url, note) {
     setNoteBcg(url);
+    onUpdateNoteBackground(note.id, url);
     setToggleNoteBcg(true);
   }
 
   return (
     <article
       className={isOpen && toggleNoteBcg ? 'note note-img' : 'note'}
-      style={
-        toggleNoteBcg
-          ? { background: `url(${noteBcg})` }
-          : { background: noteBcg }
-      }
+      style={{ background: note.background }}
     >
       {!isOpen && (
         <>
@@ -250,31 +284,31 @@ function Note({
             <div className="note-back-circle-container">
               <div
                 className="note-back-circle note-coral"
-                onClick={() => changeNoteBcg('#77172e')}
+                onClick={() => changeNoteBcg('#77172e', note)}
               ></div>
               <div
                 className="note-back-circle note-sand"
-                onClick={() => changeNoteBcg('#7c4a03')}
+                onClick={() => changeNoteBcg('#7c4a03', note)}
               ></div>
               <div
                 className="note-back-circle note-sage"
-                onClick={() => changeNoteBcg('#0c625d')}
+                onClick={() => changeNoteBcg('#0c625d', note)}
               ></div>
               <div
                 className="note-back-circle note-storm"
-                onClick={() => changeNoteBcg('#284255')}
+                onClick={() => changeNoteBcg('#284255', note)}
               ></div>
               <div
                 className="note-back-circle note-dusk"
-                onClick={() => changeNoteBcg('#472e5b')}
+                onClick={() => changeNoteBcg('#472e5b', note)}
               ></div>
               <div
                 className="note-back-circle note-blossom"
-                onClick={() => changeNoteBcg('#6c394f')}
+                onClick={() => changeNoteBcg('#6c394f', note)}
               ></div>
               <div
                 className="note-back-circle note-white"
-                onClick={() => changeNoteBcg('#fff')}
+                onClick={() => changeNoteBcg('#fff', note)}
               ></div>
             </div>
           ) : (
@@ -284,13 +318,13 @@ function Note({
                   src={kitchenImg}
                   alt="Notepad"
                   className="note-back-img img"
-                  onClick={() => changeNoteImg(kitchenImg)}
+                  onClick={() => changeNoteImg(`url(${kitchenImg})`, note)}
                 />
                 <img
                   src={cookingImg}
                   alt="Notepad"
                   className="note-back-img img"
-                  onClick={() => changeNoteImg(cookingImg)}
+                  onClick={() => changeNoteImg(`url(${cookingImg})`, note)}
                 />
               </div>
             </div>

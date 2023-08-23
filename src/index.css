@@ -365,7 +365,7 @@ Notes
 }
 
 .note {
-  background: white;
+  /* background: var(--white); */
   box-shadow: var(--shadow-2);
   padding: 0.7rem;
   margin-bottom: 1rem;
