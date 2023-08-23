@@ -22,7 +22,6 @@ const initalNotes = [
 
 export default function App() {
   const [allNotes, setAllNotes] = useState(initalNotes);
-  const [openModal, setopenModal] = useState(false);
   const [filteredNotes, setfilteredNotes] = useState([]);
 
   const [searchInput, setSearchInput] = useState('');
@@ -77,10 +76,6 @@ export default function App() {
     );
   }
 
-  function handleToggleModal() {
-    setopenModal(modal => !modal);
-  }
-
   function handleAddNote(note) {
     setAllNotes(allNotes => [...allNotes, note]);
   }
@@ -113,10 +108,7 @@ export default function App() {
         filteredNotes={filteredNotes}
         searchInput={searchInput}
       />
-      <AddNoteBtn onToggleModal={handleToggleModal} />
-      {openModal && (
-        <Modal onToggleModal={handleToggleModal} onAddNote={handleAddNote} />
-      )}
+      <AddNoteBtn onAddNote={handleAddNote} />
     </div>
   );
 }
@@ -251,6 +243,7 @@ function Note({
               }
               type="text"
               value={note.heading}
+              placeholder="Heading Text"
               onChange={e => onUpdateNoteHeading(note.id, e.target.value)}
             />
             <button
@@ -275,6 +268,7 @@ function Note({
               }
               type="text"
               value={note.text}
+              placeholder="Body Text"
               onChange={e => onUpdateNoteText(note.id, e.target.value)}
             />
           </div>
@@ -364,70 +358,23 @@ function Note({
   );
 }
 
-function AddNoteBtn({ onToggleModal }) {
-  return (
-    <button className="add-note-btn" onClick={onToggleModal}>
-      <i className="fa-solid fa-plus fa-fw"></i>
-    </button>
-  );
-}
-
-function Modal({ onToggleModal, onAddNote }) {
-  const [heading, setHeading] = useState('');
-  const [text, setText] = useState('');
-
+function AddNoteBtn({ onAddNote }) {
   function handleCreateNote(e) {
     e.preventDefault();
 
-    if (!heading || !text) return;
-
     const newNote = {
-      heading,
-      text,
+      heading: '',
+      text: '',
       background: '#fff',
       id: crypto.randomUUID(),
     };
 
-    onToggleModal();
     onAddNote(newNote);
   }
 
   return (
-    <div className="modal-container">
-      <div className="modal">
-        <form onSubmit={handleCreateNote}>
-          <div className="modal-heading">
-            <label htmlFor="heading" className="modal-label">
-              Note Heading:
-            </label>
-          </div>
-          <div>
-            <input
-              type="text"
-              className="modal-input"
-              id="heading"
-              value={heading}
-              onChange={e => setHeading(e.target.value)}
-            />
-          </div>
-          <div className="modal-text">
-            <label htmlFor="text" className="modal-label">
-              Note Text:
-            </label>
-            <input
-              type="text"
-              className="modal-input"
-              id="text"
-              value={text}
-              onChange={e => setText(e.target.value)}
-            />
-          </div>
-          <button className="modal-create-btn">Create Note</button>
-        </form>
-        <button className="modal-close-btn" onClick={onToggleModal}>
-          <i className="fa-regular fa-circle-xmark"></i>
-        </button>
-      </div>
-    </div>
+    <button className="add-note-btn" onClick={handleCreateNote}>
+      <i className="fa-solid fa-plus fa-fw"></i>
+    </button>
   );
 }
