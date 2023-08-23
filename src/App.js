@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import notepadImg from './notepad-bcg.jpg';
 import kitchenImg from './kitchen-bcg.jpg';
-
 import cookingImg from './cooking-bcg.jpg';
+import musicImg from './music-bcg.jpg';
 
 const initalNotes = [
   {
@@ -328,6 +328,12 @@ function Note({
                   alt="Notepad"
                   className="note-back-img img"
                   onClick={() => changeNoteImg(`url(${cookingImg})`, note)}
+                />
+                <img
+                  src={musicImg}
+                  alt="Notepad"
+                  className="note-back-img img"
+                  onClick={() => changeNoteImg(`url(${musicImg})`, note)}
                 />
               </div>
             </div>

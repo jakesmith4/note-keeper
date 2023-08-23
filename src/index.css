@@ -369,7 +369,7 @@ Notes
   box-shadow: var(--shadow-2);
   padding: 0.7rem;
   margin-bottom: 1rem;
-  min-height: 117px;
+  min-height: 141px;
   position: relative;
 }
 
@@ -418,6 +418,7 @@ Notes
   resize: vertical;
   background: transparent;
   color: #fff;
+  min-height: 65px;
 }
 
 .note-text-textarea:focus {
@@ -523,7 +524,7 @@ Notes
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
   .note {
     margin-bottom: 0;
