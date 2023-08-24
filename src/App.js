@@ -244,7 +244,7 @@ function Note({
               }
               type="text"
               value={note.heading}
-              placeholder="Heading Text"
+              placeholder="Title"
               onChange={e => onUpdateNoteHeading(note.id, e.target.value)}
             />
             <button
@@ -269,7 +269,7 @@ function Note({
               }
               type="text"
               value={note.text}
-              placeholder="Body Text"
+              placeholder="Note"
               onChange={e => onUpdateNoteText(note.id, e.target.value)}
             />
           </div>
