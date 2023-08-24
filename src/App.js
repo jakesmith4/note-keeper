@@ -3,6 +3,7 @@ import { useState } from 'react';
 import kitchenImg from './img/kitchen-bcg.jpg';
 import cookingImg from './img/cooking-bcg.jpg';
 import musicImg from './img/music-bcg.jpg';
+import travelImg from './img/travel-bcg.jpeg';
 
 const initalNotes = [
   {
@@ -314,21 +315,27 @@ function Note({
               <div className="note-back-circle-container">
                 <img
                   src={kitchenImg}
-                  alt="Notepad"
+                  alt="Kitchen"
                   className="note-back-img img"
                   onClick={() => changeNoteImg(`url(${kitchenImg})`, note)}
                 />
                 <img
                   src={cookingImg}
-                  alt="Notepad"
+                  alt="Cooking"
                   className="note-back-img img"
                   onClick={() => changeNoteImg(`url(${cookingImg})`, note)}
                 />
                 <img
                   src={musicImg}
-                  alt="Notepad"
+                  alt="Music"
                   className="note-back-img img"
                   onClick={() => changeNoteImg(`url(${musicImg})`, note)}
+                />
+                <img
+                  src={travelImg}
+                  alt="Travel"
+                  className="note-back-img img"
+                  onClick={() => changeNoteImg(`url(${travelImg})`, note)}
                 />
               </div>
             </div>
