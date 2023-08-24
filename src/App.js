@@ -10,16 +10,10 @@ import spaceImg from './img/space-bcg.jpg';
 
 const initalNotes = [
   {
-    heading: 'Grocery List',
-    text: 'oranges, apples, lunch meat, corn, carrots',
+    heading: '',
+    text: '',
     background: '#fff',
     id: 335875,
-  },
-  {
-    heading: 'P90X Videos',
-    text: 'chest and back, plyometrics, shoulders and arms, legs and back, back and byceps',
-    background: '#fff',
-    id: 449883,
   },
 ];
 
