@@ -83,6 +83,7 @@ export default function App() {
 
   function handleAddNote(note) {
     setAllNotes(allNotes => [...allNotes, note]);
+    setSearchInput('');
   }
 
   function handleDeleteNote(id) {
