@@ -29,8 +29,10 @@ export default function App() {
     setSearchInput(value);
 
     setfilteredNotes(
-      allNotes.filter(note =>
-        note.heading.toLowerCase().includes(value.toLowerCase())
+      allNotes.filter(
+        note =>
+          note.heading.toLowerCase().includes(value.toLowerCase()) ||
+          note.text.toLowerCase().includes(value.toLowerCase())
       )
     );
   }
