@@ -118,12 +118,12 @@ export default function App() {
         onDeleteNote={handleDeleteNote}
         filteredNotes={filteredNotes}
         searchInput={searchInput}
-        bottomEl={bottomEl}
       />
       <AddNoteBtn
         onAddNote={handleAddNote}
         onScrollToBottom={handleScrollToBottom}
       />
+      <Footer bottomEl={bottomEl} />
     </div>
   );
 }
@@ -156,7 +156,6 @@ function NotesContainer({
   onDeleteNote,
   filteredNotes,
   searchInput,
-  bottomEl,
 }) {
   const [curOpen, setCurOpen] = useState(null);
 
@@ -202,7 +201,6 @@ function NotesContainer({
           </p>
         </div>
       )}
-      <div ref={bottomEl}></div>
     </div>
   );
 }
@@ -430,5 +428,21 @@ function AddNoteBtn({ onAddNote, onScrollToBottom }) {
     <button className="add-note-btn" onClick={handleCreateNote}>
       <i className="fa-solid fa-plus fa-fw"></i>
     </button>
+  );
+}
+
+function Footer({ bottomEl }) {
+  return (
+    <div className="footer" ref={bottomEl}>
+      <p>
+        Copyright &copy; Note Keeper App{' '}
+        <span>
+          {new Date().getFullYear()}. <br /> All rights reserved
+        </span>
+      </p>
+      <p className="footer-creater">
+        Created by: <span className="footer-name">Jacob Smith</span>
+      </p>
+    </div>
   );
 }

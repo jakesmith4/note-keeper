@@ -306,6 +306,8 @@ APP
 .app {
   min-height: 100vh;
   position: relative;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
 }
 
 /* 
@@ -598,4 +600,24 @@ No Results
 .no-results-note {
   color: red;
   text-transform: capitalize;
+}
+
+/* 
+============
+Footer
+============
+*/
+.footer {
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.footer-creater {
+  font-size: 1.2rem;
+}
+
+.footer-name {
+  color: var(--primary-600);
+  font-weight: bold;
 }
