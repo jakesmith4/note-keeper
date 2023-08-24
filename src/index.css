@@ -411,14 +411,33 @@ Notes
   z-index: 1;
 }
 
+.grow-wrap {
+  display: grid;
+}
+
+.grow-wrap::after {
+  content: attr(data-replicated-value) ' ';
+  white-space: pre-wrap;
+  visibility: hidden;
+  overflow: hidden;
+}
+
 .note-text-textarea {
-  border: none;
   width: 100%;
-  resize: vertical;
   background: transparent;
   color: #fff;
+  border: none;
+  resize: none;
+  overflow: hidden;
+}
+
+.note-text-textarea,
+.grow-wrap::after {
+  padding: 0.5rem;
+  font: inherit;
   font-size: 1.2rem;
-  min-height: 65px;
+
+  grid-area: 1 / 1 / 2 / 2;
 }
 
 .note-text-textarea:focus {

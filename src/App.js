@@ -264,18 +264,26 @@ function Note({
             </button>
           </div>
           <div className="note-text-wrapper">
-            <textarea
-              className="note-text-textarea"
-              style={
-                note.background === '#fff'
-                  ? { color: 'black' }
-                  : { color: '#fff' }
-              }
-              type="text"
-              value={note.text}
-              placeholder="Note"
-              onChange={e => onUpdateNoteText(note.id, e.target.value)}
-            />
+            <div className="grow-wrap">
+              <textarea
+                className="note-text-textarea"
+                style={
+                  note.background === '#fff'
+                    ? { color: 'black' }
+                    : { color: '#fff' }
+                }
+                type="text"
+                value={note.text}
+                placeholder="Note"
+                onChange={e => onUpdateNoteText(note.id, e.target.value)}
+                onInput={e =>
+                  (e.target.parentNode.dataset.replicatedValue = e.target.value)
+                }
+                onClick={e =>
+                  (e.target.parentNode.dataset.replicatedValue = e.target.value)
+                }
+              />
+            </div>
           </div>
         </>
       )}
