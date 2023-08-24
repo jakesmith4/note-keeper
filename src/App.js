@@ -3,8 +3,10 @@ import { useState } from 'react';
 import kitchenImg from './img/kitchen-bcg.jpg';
 import cookingImg from './img/cooking-bcg.jpg';
 import musicImg from './img/music-bcg.jpg';
-import travelImg from './img/travel-bcg.jpeg';
 import fireworkImg from './img/firework-bcg.jpg';
+import videoImg from './img/movie-bcg.jpg';
+import galaxyImg from './img/galaxy-bcg.jpg';
+import spaceImg from './img/space-bcg.jpg';
 
 const initalNotes = [
   {
@@ -333,16 +335,28 @@ function Note({
                   onClick={() => changeNoteImg(`url(${musicImg})`, note)}
                 />
                 <img
-                  src={travelImg}
-                  alt="Travel"
+                  src={videoImg}
+                  alt="Galxay"
                   className="note-back-img img"
-                  onClick={() => changeNoteImg(`url(${travelImg})`, note)}
+                  onClick={() => changeNoteImg(`url(${videoImg})`, note)}
                 />
                 <img
                   src={fireworkImg}
                   alt="Firework"
                   className="note-back-img img"
                   onClick={() => changeNoteImg(`url(${fireworkImg})`, note)}
+                />
+                <img
+                  src={galaxyImg}
+                  alt="Galxay"
+                  className="note-back-img img"
+                  onClick={() => changeNoteImg(`url(${galaxyImg})`, note)}
+                />
+                <img
+                  src={spaceImg}
+                  alt="Space"
+                  className="note-back-img img"
+                  onClick={() => changeNoteImg(`url(${spaceImg})`, note)}
                 />
               </div>
             </div>
