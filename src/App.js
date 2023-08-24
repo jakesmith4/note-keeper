@@ -358,7 +358,11 @@ function Note({
               className="note-img-btn note-back-btn"
               onClick={handleToggleNoteBtns}
             >
-              <i className="fa-regular fa-image"></i>
+              {toggleNoteBtns ? (
+                <i className="fa-regular fa-image"></i>
+              ) : (
+                <i className="fa-solid fa-palette"></i>
+              )}
             </button>
             <button
               className="note-close-btn note-back-btn"
