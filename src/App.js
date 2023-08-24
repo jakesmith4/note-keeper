@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import kitchenImg from './img/kitchen-bcg.jpg';
 import cookingImg from './img/cooking-bcg.jpg';
@@ -28,6 +28,12 @@ export default function App() {
   const [filteredNotes, setfilteredNotes] = useState([]);
 
   const [searchInput, setSearchInput] = useState('');
+
+  const bottomEl = useRef(null);
+
+  function handleScrollToBottom() {
+    bottomEl?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
 
   function handleFilterSearchResults(value) {
     setSearchInput(value);
@@ -112,8 +118,12 @@ export default function App() {
         onDeleteNote={handleDeleteNote}
         filteredNotes={filteredNotes}
         searchInput={searchInput}
+        bottomEl={bottomEl}
       />
-      <AddNoteBtn onAddNote={handleAddNote} />
+      <AddNoteBtn
+        onAddNote={handleAddNote}
+        onScrollToBottom={handleScrollToBottom}
+      />
     </div>
   );
 }
@@ -146,11 +156,12 @@ function NotesContainer({
   onDeleteNote,
   filteredNotes,
   searchInput,
+  bottomEl,
 }) {
   const [curOpen, setCurOpen] = useState(null);
 
   return (
-    <div className="notes-container section-center ">
+    <div className="notes-container section-center">
       {!searchInput &&
         allNotes.map(note => (
           <Note
@@ -191,6 +202,7 @@ function NotesContainer({
           </p>
         </div>
       )}
+      <div ref={bottomEl}></div>
     </div>
   );
 }
@@ -399,7 +411,7 @@ function Note({
   );
 }
 
-function AddNoteBtn({ onAddNote }) {
+function AddNoteBtn({ onAddNote, onScrollToBottom }) {
   function handleCreateNote(e) {
     e.preventDefault();
 
@@ -411,6 +423,7 @@ function AddNoteBtn({ onAddNote }) {
     };
 
     onAddNote(newNote);
+    onScrollToBottom();
   }
 
   return (
