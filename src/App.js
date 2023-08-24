@@ -355,7 +355,7 @@ function Note({
               <i className="fa-solid fa-trash"></i>
             </button>
             <button
-              className="note-img-btn note-back-btn"
+              className="note-img-color-btn note-back-btn"
               onClick={handleToggleNoteBtns}
             >
               {toggleNoteBtns ? (

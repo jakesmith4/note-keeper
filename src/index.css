@@ -463,8 +463,12 @@ Notes
   font-size: 2.3rem;
 }
 
-.note-img-btn {
+.note-img-color-btn {
   font-size: 2rem;
+}
+
+.note-img-color-btn:hover {
+  color: var(--primary-600);
 }
 
 /* Back Of Note */
