@@ -571,7 +571,7 @@ Add Note Button
 .add-note-btn {
   position: fixed;
   top: 90%;
-  left: 86%;
+  left: 80%;
   cursor: pointer;
   background: var(--primary-600);
   color: var(--white);
@@ -584,6 +584,12 @@ Add Note Button
   justify-content: center;
   align-items: center;
   z-index: 2;
+}
+
+@media screen and (min-width: 576px) {
+  .add-note-btn {
+    left: 86%;
+  }
 }
 
 /* 
