@@ -23,6 +23,8 @@ export default function App() {
 
   const [searchInput, setSearchInput] = useState('');
 
+  const [curOpen, setCurOpen] = useState(null);
+
   const bottomEl = useRef(null);
 
   function handleScrollToBottom() {
@@ -31,6 +33,7 @@ export default function App() {
 
   function handleFilterSearchResults(value) {
     setSearchInput(value);
+    setCurOpen(false);
 
     setfilteredNotes(
       allNotes.filter(
@@ -113,6 +116,8 @@ export default function App() {
         onDeleteNote={handleDeleteNote}
         filteredNotes={filteredNotes}
         searchInput={searchInput}
+        curOpen={curOpen}
+        setCurOpen={setCurOpen}
       />
       <AddNoteBtn
         onAddNote={handleAddNote}
@@ -151,9 +156,9 @@ function NotesContainer({
   onDeleteNote,
   filteredNotes,
   searchInput,
+  curOpen,
+  setCurOpen,
 }) {
-  const [curOpen, setCurOpen] = useState(null);
-
   return (
     <div className="notes-container section-center">
       {!searchInput &&
