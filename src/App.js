@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import kitchenImg from './kitchen-bcg.jpg';
-import cookingImg from './cooking-bcg.jpg';
-import musicImg from './music-bcg.jpg';
+import kitchenImg from './img/kitchen-bcg.jpg';
+import cookingImg from './img/cooking-bcg.jpg';
+import musicImg from './img/music-bcg.jpg';
 
 const initalNotes = [
   {
