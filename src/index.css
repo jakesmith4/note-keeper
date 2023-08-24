@@ -514,6 +514,7 @@ Notes
   height: 30px;
   border-radius: 50%;
   border: 2px solid var(--grey-300);
+  filter: brightness(1.5);
   cursor: pointer;
   z-index: 1;
 }
@@ -561,6 +562,7 @@ Add Note Button
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 /* 
