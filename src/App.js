@@ -4,6 +4,7 @@ import kitchenImg from './img/kitchen-bcg.jpg';
 import cookingImg from './img/cooking-bcg.jpg';
 import musicImg from './img/music-bcg.jpg';
 import travelImg from './img/travel-bcg.jpeg';
+import fireworkImg from './img/firework-bcg.jpg';
 
 const initalNotes = [
   {
@@ -336,6 +337,12 @@ function Note({
                   alt="Travel"
                   className="note-back-img img"
                   onClick={() => changeNoteImg(`url(${travelImg})`, note)}
+                />
+                <img
+                  src={fireworkImg}
+                  alt="Firework"
+                  className="note-back-img img"
+                  onClick={() => changeNoteImg(`url(${fireworkImg})`, note)}
                 />
               </div>
             </div>
